@@ -4,7 +4,7 @@ describe('Spacecraft', () => {
   it('should move forward correctly', () => {
     const spacecraft = new Spacecraft(0, 0, 0, 'N');
     spacecraft.moveForward();
-    expect(spacecraft.position).toEqual({ x: 0, y: 1, z: 0 });
+    expect(spacecraft.position).toEqual({ x : 0, y: 1, z: 0 });
   });
 
   it('should move backward correctly', () => {
@@ -15,8 +15,31 @@ describe('Spacecraft', () => {
 
   it('should turn left correctly', () => {
     const spacecraft = new Spacecraft(0, 0, 0, 'N');
-    spacecraft.turnLeft();
-    expect(spacecraft.direction).toBe('W');
+    if(spacecraft.direction == 'N'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('W');
+    }
+    if(spacecraft.direction == 'W'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('S');
+    }
+    if(spacecraft.direction == 'S'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('E');
+    }
+    if(spacecraft.direction == 'E'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('N');
+    }
+    if(spacecraft.direction == 'Up'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('W');
+    }
+    if(spacecraft.direction == 'Down'){
+      spacecraft.turnLeft();
+      expect(spacecraft.direction).toBe('W');
+    }
+    
   });
 
   it('should turn right correctly', () => {
