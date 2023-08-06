@@ -1,6 +1,7 @@
 class Spacecraft {
-  constructor(x, y, z, direction) {
+  constructor(x, y, z, direction, l, r) {
     this.position = { x, y, z };
+    this.dir = {l, r}
     this.direction = direction;
   }
 
@@ -51,6 +52,10 @@ class Spacecraft {
   }
 
   turnLeft() {
+    if(this.direction == "Up" || this.direction == "Down"){
+      this.direction = this.dir.l;
+      return;
+    }
     switch (this.direction) {
       case "N":
         this.direction = "W";
@@ -74,6 +79,16 @@ class Spacecraft {
   }
 
   turnRight() {
+
+    if(this.direction == "Up"){
+      this.direction = this.direction.r;
+      return;
+    }
+    if(this.direction == "Down"){
+      this.direction = this.direction.r;
+      return;
+    }
+
     switch (this.direction) {
       case "N":
         this.direction = "E";
@@ -97,6 +112,22 @@ class Spacecraft {
   }
 
   turnUp() {
+      if(this.direction == "N"){
+        this.dir.l = "S";
+        this.dir.r = "N"
+      }
+      if(this.direction == "S"){
+        this.dir.l = "N";
+        this.dir.r = "S"
+      }
+      if(this.direction == "E"){
+        this.dir.l = "W";
+        this.dir.r = "E"
+      }
+      if(this.direction == "W"){
+        this.dir.l = "E";
+        this.dir.r = "W"
+      }
     switch (this.direction) {
       case "N":
       case "S":
@@ -104,10 +135,34 @@ class Spacecraft {
       case "W":
         this.direction = "Up";
         break;
+
+      case "Up":
+        this.direction = "Up";
+        break;
     }
+    console.log(this.dir)
   }
 
   turnDown() {
+
+    if(this.direction == "N"){
+      this.dir.l = "S";
+      this.dir.r = "N"
+    }
+    if(this.direction == "S"){
+      this.dir.l = "N";
+      this.dir.r = "S"
+    }
+    if(this.direction == "E"){
+      this.dir.l = "W";
+      this.dir.r = "E"
+    }
+    if(this.direction == "W"){
+      this.dir.l = "E";
+      this.dir.r = "W"
+    }
+
+
     switch (this.direction) {
       case "N":
       case "S":
@@ -116,7 +171,10 @@ class Spacecraft {
         this.direction = "Down";
         break;
     }
+    console.log(this.dir)
   }
+  
+
 }
 
 module.exports = Spacecraft;
@@ -147,8 +205,8 @@ for (const command of commands) {
       chandrayaan3.turnDown();
       break;
   }
+  console.log("Final Position:", chandrayaan3.position);
+  console.log("Final Direction:", chandrayaan3.direction);
 }
 
 // Print final position and direction
-console.log("Final Position:", chandrayaan3.position);
-console.log("Final Direction:", chandrayaan3.direction);
